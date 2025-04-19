@@ -1,5 +1,13 @@
 ## Hi there 👋
 
+im ninocity, just a curious guy trying to work out how things work in the world
+
+Wish me good luck 😄.
+
+- 🔭 I’m currently working on the **Github Foundation Certification**
+- 💬 If you have any ideas or tips feel free to send me a message
+
+
 <!--
 **ninocity31/ninocity31** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
