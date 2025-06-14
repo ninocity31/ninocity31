@@ -1,67 +1,72 @@
 <h1 align="center">Hi 👋, I'm Souhail</h1>
-<h3 align="center">A passionate Electronics and Telecommunication's engineering student</h3>
+<h3 align="center">🎓 Electronics and Telecommunications Engineering Student</h3>
 
-<p align="left"> <img src="https://komarev.com/ghpvc/?username=ninocity3&label=Profile%20views&color=0e75b6&style=flat" alt="ninocity3" /> </p>
-
-<h2 align="left">🎓  Profile Summary</h2>
-Motivated and hands-on Electronics and Telecommunications Engineering student with strong technical expertise in embedded systems, networking, RF circuit simulation, and PCB design. Skilled in both low-level programming (Assembly for microcontrollers) and high-level analysis using MATLAB. Experienced with industry-standard tools such as Keysight ADS, KiCad, and Packet Tracer, with a solid grasp of the TCP/IP stack and electronic system design.
-
-<!-- Compétences Techniques -->
-<div class="section">
-  <h2>🛠️ Compétences Techniques</h2>
-  <ul>
-    <li><strong>Langages :</strong> C, Python, Assembleur (68HC12)</li>
-    <li><strong>Simulation RF :</strong> Keysight ADS</li>
-    <li><strong>Conception PCB :</strong> KiCad</li>
-    <li><strong>Systèmes embarqués :</strong> Microcontrôleurs, programmation bas-niveau, timers, UART</li>
-    <li><strong>Réseaux :</strong> TCP/IP, sous-réseautage, Packet Tracer, Wireshark</li>
-    <li><strong>Analyse & traitement :</strong> MATLAB</li>
-    <li><strong>Environnements :</strong> Linux, Git</li>
-  </ul>
-</div>
-
-<!-- Expériences & Projets -->
-<div class="section">
-  <h2>💼 Expériences & Projets</h2>
-  <ul>
-    <li><strong>Coupe de Robotique 2025 :</strong> Conception et programmation d’un robot autonome (capteurs, moteurs, PI, chrono match).</li>
-    <li><strong>Simulation RF avec ADS :</strong> Amplificateur classe AB, paramètres S, adaptation impédance.</li>
-    <li><strong>PCB capteur :</strong> Conception complète sur KiCad, microcontrôleur basse consommation.</li>
-    <li><strong>Programmation 68HC12 :</strong> Projet en assembleur pour la gestion d’E/S, interruption, UART.</li>
-    <li><strong>Laboratoire réseaux :</strong> Configuration complète de réseaux sur Packet Tracer, analyse Wireshark.</li>
-    <li><strong>MATLAB :</strong> Filtrage, analyse spectrale, simulation de canaux bruités.</li>
-  </ul>
-</div>
-
-
-- 🔭 I’m currently Studying for a CCNA Certificate **Cisco Certified Network Associate**
-
-- 👨‍💻 All of my projects are available at my LinkedIn [www.linkedin.com/in/mouradi-souhail](www.linkedin.com/in/mouradi-souhail)
-
-<h3 align="left">Connect with me:</h3>
-<p align="left">
-<a href="https://linkedin.com/in/mouradi-souhail" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="mouradi-souhail" height="30" width="40" /></a>
+<p align="center">
+  <img src="https://komarev.com/ghpvc/?username=ninocity3&label=Profile%20views&color=0e75b6&style=flat" alt="profile views"/>
+  <img src="https://img.shields.io/badge/CCNA%20-Certification%20in%20Progress-blue" alt="ccna badge"/>
 </p>
 
-<h3 align="left">Languages and Tools:</h3>
+---
+
+## 🧑‍💻 About Me
+
+Motivated and hands-on engineering student with technical expertise in **embedded systems**, **networking**, **RF simulation**, and **PCB design**. Skilled in both low-level programming (Assembly for microcontrollers) and high-level environments like MATLAB.
+
+Currently pursuing **CCNA** certification to deepen my networking foundation.
+
+---
+
+## 🛠️ Technical Skills / Compétences Techniques
+
+- **Languages:** `C`, `Python`, `Assembly (68HC12)`
+- **Simulation Tools:** `Keysight ADS`, `MATLAB`
+- **PCB Design:** `KiCad`
+- **Networking:** `TCP/IP`, `Subnetting`, `Packet Tracer`, `Wireshark`
+- **Embedded Systems:** Timers, UART, low-level driver development
+- **Environments:** `Linux`, `Git`, `Visual Studio Code`
+
+---
+
+## 💼 Experience & Projects / Expériences & Projets
+
+- ⚙️ **Coupe de Robotique 2025**  
+  *Autonomous robot design (sensors, motors, PI control, match timer)*
+
+- 📡 **RF Simulation with ADS**  
+  *Designed class AB amplifier, calculated S-parameters, impedance matching*
+
+- 🔧 **Sensor PCB Design**  
+  *Complete design on KiCad with low-power microcontroller integration*
+
+- 🧠 **Assembly Project (68HC12)**  
+  *I/O management, interrupts, UART serial communication*
+
+- 🌐 **Networking Lab Work**  
+  *Full configuration of networks using Packet Tracer + Wireshark packet analysis*
+
+- 📊 **MATLAB Signal Processing**  
+  *Filtering, FFT analysis, noise modeling, signal chain simulation*
+
+---
+
+## 🌐 Connect with Me
+
+[![LinkedIn](https://img.shields.io/badge/-mouradi--souhail-blue?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/mouradi-souhail)
+
+---
+
+## 🧰 Tools & Technologies
+
 <p align="left">
-  <a href="https://www.arduino.cc/" target="_blank" rel="noreferrer">
-    <img src="https://cdn.worldvectorlogo.com/logos/arduino-1.svg" alt="arduino" width="40" height="40"/>
-  </a>
-  <a href="https://www.cprogramming.com/" target="_blank" rel="noreferrer">
-    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/c/c-original.svg" alt="c" width="40" height="40"/>
-  </a>
-  <a href="https://git-scm.com/" target="_blank" rel="noreferrer">
-    <img src="https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg" alt="git" width="40" height="40"/>
-  </a>
-  <a href="https://www.linux.org/" target="_blank" rel="noreferrer">
-    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/linux/linux-original.svg" alt="linux" width="40" height="40"/>
-  </a>
-  <a href="https://www.python.org" target="_blank" rel="noreferrer">
-    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="python" width="40" height="40"/>
-  </a>
-  <a href="https://en.wikipedia.org/wiki/Assembly_language" target="_blank" rel="noreferrer">
-    <img src="https://media.licdn.com/dms/image/v2/D4D12AQEM9F_-u1OT5Q/article-cover_image-shrink_600_2000/article-cover_image-shrink_600_2000/0/1658763190886?e=2147483647&v=beta&t=aEp72fzTRZC_0EilFbT0wVV2jw6O-Bqt759qLG4pLrw" alt="Assembly" width="40" height="40"/>
-  </a>
+  <img src="https://cdn.worldvectorlogo.com/logos/arduino-1.svg" alt="Arduino" width="40" height="40"/>
+  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/c/c-original.svg" alt="C" width="40" height="40"/>
+  <img src="https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg" alt="Git" width="40" height="40"/>
+  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/linux/linux-original.svg" alt="Linux" width="40" height="40"/>
+  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="Python" width="40" height="40"/>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/2/21/Matlab_Logo.png" alt="MATLAB" width="40" height="40"/>
 </p>
+
+---
+
+> 🚀 “Learning by doing is my mantra. I love to build, simulate, and solve real-world engineering problems.”
 
