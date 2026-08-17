@@ -88,7 +88,7 @@ hardware timer driving the match state machine.
 
 `C` `Embedded C` `PI Control` `Sensor Interfacing`
 
-<!-- [Repository →](https://github.com/ninocity3/REPO-NAME) -->
+<!-- [Repository →](https://github.com/ninocity31/REPO-NAME) -->
 
 </td>
 <td width="50%" valign="top">
@@ -102,7 +102,7 @@ and stability analysis across the operating band.
 
 `Keysight ADS` `S-Parameters` `Smith Chart` `Impedance Matching`
 
-<!-- [Repository →](https://github.com/ninocity3/REPO-NAME) -->
+<!-- [Repository →](https://github.com/ninocity31/REPO-NAME) -->
 
 </td>
 </tr>
@@ -118,7 +118,7 @@ layout, and DRC-clean manufacturing output.
 
 `KiCad` `Low-Power MCU` `Schematic Capture` `PCB Layout`
 
-<!-- [Repository →](https://github.com/ninocity3/REPO-NAME) -->
+<!-- [Repository →](https://github.com/ninocity31/REPO-NAME) -->
 
 </td>
 <td width="50%" valign="top">
@@ -132,7 +132,7 @@ UART driver for serial communication.
 
 `68HC12 Assembly` `ISRs` `Timers` `UART`
 
-<!-- [Repository →](https://github.com/ninocity3/REPO-NAME) -->
+<!-- [Repository →](https://github.com/ninocity31/REPO-NAME) -->
 
 </td>
 </tr>
@@ -148,7 +148,7 @@ traffic in Wireshark down to the frame level.
 
 `Cisco IOS` `TCP/IP` `Subnetting` `Wireshark`
 
-<!-- [Repository →](https://github.com/ninocity3/REPO-NAME) -->
+<!-- [Repository →](https://github.com/ninocity31/REPO-NAME) -->
 
 </td>
 <td width="50%" valign="top">
@@ -162,7 +162,7 @@ signal chain.
 
 `MATLAB` `FFT` `Digital Filtering` `Noise Modelling`
 
-<!-- [Repository →](https://github.com/ninocity3/REPO-NAME) -->
+<!-- [Repository →](https://github.com/ninocity31/REPO-NAME) -->
 
 </td>
 </tr>
@@ -174,17 +174,17 @@ signal chain.
 
 <div align="center">
 
-<img height="165" src="https://github-readme-stats.vercel.app/api?username=ninocity3&show_icons=true&hide_border=true&bg_color=00000000&title_color=0e75b6&icon_color=0e75b6&text_color=8b949e&include_all_commits=true&hide=issues" alt="GitHub stats"/>
-<img height="165" src="https://github-readme-stats.vercel.app/api/top-langs/?username=ninocity3&layout=compact&hide_border=true&bg_color=00000000&title_color=0e75b6&text_color=8b949e&langs_count=8" alt="Top languages"/>
+<img height="165" src="https://github-readme-stats.vercel.app/api?username=ninocity31&show_icons=true&hide_border=true&bg_color=00000000&title_color=0e75b6&icon_color=0e75b6&text_color=8b949e&include_all_commits=true&hide=issues" alt="GitHub stats"/>
+<img height="165" src="https://github-readme-stats.vercel.app/api/top-langs/?username=ninocity31&layout=compact&hide_border=true&bg_color=00000000&title_color=0e75b6&text_color=8b949e&langs_count=8" alt="Top languages"/>
 
 <br/><br/>
 
-<img src="https://github-readme-activity-graph.vercel.app/graph?username=ninocity3&bg_color=00000000&color=8b949e&line=0e75b6&point=0e75b6&area=true&area_color=0e75b6&hide_border=true&custom_title=Contribution%20Activity" width="98%" alt="activity graph"/>
+<img src="https://github-readme-activity-graph.vercel.app/graph?username=ninocity31&bg_color=00000000&color=8b949e&line=0e75b6&point=0e75b6&area=true&area_color=0e75b6&hide_border=true&custom_title=Contribution%20Activity" width="98%" alt="activity graph"/>
 
 <br/>
 
 <!-- Needs .github/workflows/snake.yml to run once before this renders -->
-<img src="https://raw.githubusercontent.com/ninocity3/ninocity3/output/snake.svg" width="98%" alt="contribution snake"/>
+<img src="https://raw.githubusercontent.com/ninocity31/ninocity31/output/snake.svg" width="98%" alt="contribution snake"/>
 
 </div>
 
@@ -197,7 +197,7 @@ signal chain.
 <a href="https://www.linkedin.com/in/mouradi-souhail">LinkedIn</a> ·
 <a href="mailto:souhailmouradi2004@gmail.com">Email</a>
 
-<img src="https://komarev.com/ghpvc/?username=ninocity3&label=Profile%20views&color=0e75b6&style=flat-square" alt="profile views"/>
+<img src="https://komarev.com/ghpvc/?username=ninocity31&label=Profile%20views&color=0e75b6&style=flat-square" alt="profile views"/>
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0a2540,100:0e75b6&height=100&section=footer" width="100%" alt="footer"/>
 
