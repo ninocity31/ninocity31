@@ -1,18 +1,4 @@
-<!--
-  ============================================================
-  GitHub Profile README — Souhail Mouradi (@ninocity3)
-  ------------------------------------------------------------
-  BEFORE YOU COMMIT THIS:
-  1. Replace every "REPO-NAME" placeholder with your real repo slug,
-     or delete the link if the repo isn't public yet.
-  2. Read the project descriptions and DELETE any technical detail
-     you didn't actually do. Some lines are elaborations of your
-     original bullets — they must be true or they'll burn you in
-     an interview.
-  3. The contribution-snake image needs .github/workflows/snake.yml
-     (included alongside this file) to exist and run once.
-  ============================================================
--->
+
 
 <div align="center">
 
