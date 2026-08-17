@@ -1,4 +1,16 @@
-
+# ============================================================
+# Contribution snake animation
+# ------------------------------------------------------------
+# Save this file in your PROFILE repo (github.com/ninocity3/ninocity3)
+# at this exact path:   .github/workflows/snake.yml
+#
+# Then: Actions tab -> "Generate snake animation" -> Run workflow.
+# It creates an "output" branch holding snake.svg, which the README
+# image URL points at. After the first run it updates itself daily.
+#
+# One-time setting: Settings -> Actions -> General ->
+# Workflow permissions -> "Read and write permissions" -> Save.
+# ============================================================
 
 name: Generate snake animation
 
@@ -34,6 +46,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          # snk is a Docker action, so it runs as root and leaves dist/
+          # root-owned. This step runs as `runner`, which then can't
+          # create dist/.git. Hand ownership back before touching git.
+          sudo chown -R "$(id -u):$(id -g)" .
           git init -q
           git checkout -q -b output
           git config user.name  "github-actions[bot]"
