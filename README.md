@@ -6,7 +6,7 @@
 <br/><br/>
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-mouradi--souhail-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/mouradi-souhail)
-[![Email](https://img.shields.io/badge/Email-souhailmouradi2004-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:souhailmouradi2004@gmail.com)
+[![Email](https://img.shields.io/badge/Email-souhailmouradi-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:souhail.mouradi@etu.unilim.fr)
 
 </div>
 
