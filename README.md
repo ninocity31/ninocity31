@@ -1,16 +1,29 @@
-
+<!--
+  ============================================================
+  GitHub Profile README — Souhail Mouradi (@ninocity3)
+  ------------------------------------------------------------
+  BEFORE YOU COMMIT THIS:
+  1. Replace every "REPO-NAME" placeholder with your real repo slug,
+     or delete the link if the repo isn't public yet.
+  2. Read the project descriptions and DELETE any technical detail
+     you didn't actually do. Some lines are elaborations of your
+     original bullets — they must be true or they'll burn you in
+     an interview.
+  3. The contribution-snake image needs .github/workflows/snake.yml
+     (included alongside this file) to exist and run once.
+  ============================================================
+-->
 
 <div align="center">
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0e75b6,100:0a2540&height=170&section=header&text=Souhail%20Mouradi&fontSize=48&fontColor=ffffff&animation=fadeIn&fontAlignY=36&desc=Electronics%20%26%20Telecommunications%20Engineering&descAlignY=58&descSize=16" width="100%" alt="banner"/>
 
 <a href="https://www.linkedin.com/in/mouradi-souhail">
-  <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=600&size=21&duration=2600&pause=900&color=0E75B6&center=true&vCenter=true&width=560&lines=Embedded+systems+%2F+bare-metal+firmware;RF+design+%26+simulation+in+Keysight+ADS;PCB+design+from+schematic+to+gerbers;Networking+%E2%80%94+CCNA+in+progress" alt="what I do"/>
+  <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=600&size=21&duration=2600&pause=900&color=0E75B6&center=true&vCenter=true&width=560&lines=Embedded+systems+%2F+bare-metal+firmware;RF+design+%26+simulation+in+Keysight+ADS;PCB+design+from+schematic+to+gerbers;Network+design+%26+packet-level+analysis" alt="what I do"/>
 </a>
 
 <br/>
 
-[![CCNA](https://img.shields.io/badge/CCNA-in%20progress-0e75b6?style=for-the-badge&logo=cisco&logoColor=white)](https://www.netacad.com/)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-mouradi--souhail-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/mouradi-souhail)
 [![Email](https://img.shields.io/badge/Email-souhailmouradi2004-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:souhailmouradi2004@gmail.com)
 
@@ -27,8 +40,11 @@ Most of what I build sits in the layer people usually skip: register-level drive
 matching, signal integrity, and the physical layer underneath the protocols. I care about
 understanding the whole chain rather than treating any of it as a black box.
 
-**Currently:** studying for the CCNA, and extending my embedded work toward RTOS-based
-firmware and low-power wireless.
+<!-- Replace the line below with what you're ACTUALLY working on right now.
+     A specific, current project is the single most useful line on this page
+     for anyone deciding whether to reach out. -->
+**Currently:** deepening my embedded work — moving from bare-metal toward
+RTOS-based firmware, and building out my PCB and RF simulation portfolio.
 
 ---
 
