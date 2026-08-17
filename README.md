@@ -1,14 +1,9 @@
 
-
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0e75b6,100:0a2540&height=170&section=header&text=Souhail%20Mouradi&fontSize=48&fontColor=ffffff&animation=fadeIn&fontAlignY=36&desc=Electronics%20%26%20Telecommunications%20Engineering&descAlignY=58&descSize=16" width="100%" alt="banner"/>
+<img src="assets/banner.svg" width="100%" alt="Souhail Mouradi — Electronics & Telecommunications Engineering"/>
 
-<a href="https://www.linkedin.com/in/mouradi-souhail">
-  <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=600&size=21&duration=2600&pause=900&color=0E75B6&center=true&vCenter=true&width=560&lines=Embedded+systems+%2F+bare-metal+firmware;RF+design+%26+simulation+in+Keysight+ADS;PCB+design+from+schematic+to+gerbers;Network+design+%26+packet-level+analysis" alt="what I do"/>
-</a>
-
-<br/>
+<br/><br/>
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-mouradi--souhail-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/mouradi-souhail)
 [![Email](https://img.shields.io/badge/Email-souhailmouradi2004-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:souhailmouradi2004@gmail.com)
@@ -170,35 +165,15 @@ signal chain.
 
 ---
 
-## GitHub
-
 <div align="center">
 
-<img height="165" src="https://github-readme-stats.vercel.app/api?username=ninocity31&show_icons=true&hide_border=true&bg_color=00000000&title_color=0e75b6&icon_color=0e75b6&text_color=8b949e&include_all_commits=true&hide=issues" alt="GitHub stats"/>
-<img height="165" src="https://github-readme-stats.vercel.app/api/top-langs/?username=ninocity31&layout=compact&hide_border=true&bg_color=00000000&title_color=0e75b6&text_color=8b949e&langs_count=8" alt="Top languages"/>
+<img src="assets/signal-chain.svg" width="100%" alt="Acquisition signal chain: sensor, amplifier, filter, ADC, UART"/>
 
 <br/><br/>
-
-<img src="https://github-readme-activity-graph.vercel.app/graph?username=ninocity31&bg_color=00000000&color=8b949e&line=0e75b6&point=0e75b6&area=true&area_color=0e75b6&hide_border=true&custom_title=Contribution%20Activity" width="98%" alt="activity graph"/>
-
-<br/>
-
-<!-- Needs .github/workflows/snake.yml to run once before this renders -->
-<img src="https://raw.githubusercontent.com/ninocity31/ninocity31/output/snake.svg" width="98%" alt="contribution snake"/>
-
-</div>
-
----
-
-<div align="center">
 
 **Open to internships and collaboration in embedded systems, RF, and networking.**
 
 <a href="https://www.linkedin.com/in/mouradi-souhail">LinkedIn</a> ·
 <a href="mailto:souhailmouradi2004@gmail.com">Email</a>
-
-<img src="https://komarev.com/ghpvc/?username=ninocity31&label=Profile%20views&color=0e75b6&style=flat-square" alt="profile views"/>
-
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0a2540,100:0e75b6&height=100&section=footer" width="100%" alt="footer"/>
 
 </div>
