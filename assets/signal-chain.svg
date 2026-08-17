@@ -1,0 +1,131 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 210" width="1200" height="210"
+     role="img" aria-label="Signal chain: sensor, amplifier, filter, ADC, UART">
+  <title>Acquisition signal chain - sensor to serial output</title>
+  <defs>
+    <filter id="g2" x="-160%" y="-160%" width="420%" height="420%">
+      <feGaussianBlur stdDeviation="3.4" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <clipPath id="card2"><rect width="1200" height="210" rx="12"/></clipPath>
+  </defs>
+  <g clip-path="url(#card2)">
+    <rect width="1200" height="210" fill="#071a2b"/>
+    <text x="600.0" y="26" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,'DejaVu Sans Mono',monospace" font-size="11.5"
+          letter-spacing="3.2" fill="#4f7d9c">ACQUISITION SIGNAL CHAIN</text>
+    
+    <g>
+      <line x1="235.0" y1="102.0" x2="290.0" y2="102.0" stroke="#1f4e75" stroke-width="2"/>
+      <line x1="235.0" y1="102.0" x2="290.0" y2="102.0" stroke="#38bdf8" stroke-width="2"
+            stroke-dasharray="7 9" stroke-linecap="round">
+        <animate attributeName="stroke-dashoffset" values="32;0" dur="0.85s" repeatCount="indefinite"/>
+      </line>
+      <path d="M282.0,97.0 L290.0,102.0 L282.0,107.0"
+            fill="none" stroke="#38bdf8" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+    <g>
+      <line x1="460.0" y1="102.0" x2="515.0" y2="102.0" stroke="#1f4e75" stroke-width="2"/>
+      <line x1="460.0" y1="102.0" x2="515.0" y2="102.0" stroke="#38bdf8" stroke-width="2"
+            stroke-dasharray="7 9" stroke-linecap="round">
+        <animate attributeName="stroke-dashoffset" values="32;0" dur="0.85s" repeatCount="indefinite"/>
+      </line>
+      <path d="M507.0,97.0 L515.0,102.0 L507.0,107.0"
+            fill="none" stroke="#38bdf8" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+    <g>
+      <line x1="685.0" y1="102.0" x2="740.0" y2="102.0" stroke="#1f4e75" stroke-width="2"/>
+      <line x1="685.0" y1="102.0" x2="740.0" y2="102.0" stroke="#38bdf8" stroke-width="2"
+            stroke-dasharray="7 9" stroke-linecap="round">
+        <animate attributeName="stroke-dashoffset" values="32;0" dur="0.85s" repeatCount="indefinite"/>
+      </line>
+      <path d="M732.0,97.0 L740.0,102.0 L732.0,107.0"
+            fill="none" stroke="#38bdf8" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+    <g>
+      <line x1="910.0" y1="102.0" x2="965.0" y2="102.0" stroke="#1f4e75" stroke-width="2"/>
+      <line x1="910.0" y1="102.0" x2="965.0" y2="102.0" stroke="#38bdf8" stroke-width="2"
+            stroke-dasharray="7 9" stroke-linecap="round">
+        <animate attributeName="stroke-dashoffset" values="32;0" dur="0.85s" repeatCount="indefinite"/>
+      </line>
+      <path d="M957.0,97.0 L965.0,102.0 L957.0,107.0"
+            fill="none" stroke="#38bdf8" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+    
+    <g>
+      <rect x="65.0" y="44" width="170" height="116" rx="9"
+            fill="#0d2137" stroke="#1f4e75" stroke-width="1.5"/>
+      <rect x="65.0" y="44" width="170" height="3" rx="1.5" fill="#38bdf8" opacity="0.75"/>
+      <text x="150.0" y="74" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,'DejaVu Sans Mono',monospace"
+            font-size="15" font-weight="700" fill="#e8f3fb" letter-spacing="1.6">SENSOR</text>
+      <text x="150.0" y="94" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,'DejaVu Sans Mono',monospace"
+            font-size="11" fill="#7d9db4" letter-spacing="0.8">analog in</text>
+      <g transform="translate(87.0,0)">
+        <path d="M0,128.80 L3,131.21 L6,137.60 L9,135.57 L12,139.22 L15,137.08 L18,132.67 L21,132.48 L24,125.63 L27,124.87 L30,119.72 L33,118.41 L36,120.67 L39,124.87 L42,122.77 L45,126.89 L48,133.29 L51,138.72 L54,138.52 L57,138.28 L60,141.72 L63,133.49 L66,136.02 L69,128.57 L72,124.00 L75,120.82 L78,120.22 L81,123.17 L84,119.84 L87,124.88 L90,128.52 L93,130.36 L96,135.00 L99,134.38 L102,135.82 L105,136.81 L108,138.58 L111,134.18 L114,129.96 L117,128.15 L120,124.00 L123,120.65 L126,123.02" fill="none" stroke="#f0a868" stroke-width="2"
+              stroke-linejoin="round" stroke-linecap="round" opacity="0.95"/>
+      </g>
+    </g>
+    <g>
+      <rect x="290.0" y="44" width="170" height="116" rx="9"
+            fill="#0d2137" stroke="#1f4e75" stroke-width="1.5"/>
+      <rect x="290.0" y="44" width="170" height="3" rx="1.5" fill="#38bdf8" opacity="0.75"/>
+      <text x="375.0" y="74" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,'DejaVu Sans Mono',monospace"
+            font-size="15" font-weight="700" fill="#e8f3fb" letter-spacing="1.6">AMPLIFIER</text>
+      <text x="375.0" y="94" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,'DejaVu Sans Mono',monospace"
+            font-size="11" fill="#7d9db4" letter-spacing="0.8">gain stage</text>
+      <g transform="translate(312.0,0)">
+        <path d="M0,129.08 L3,134.96 L6,143.21 L9,143.80 L12,147.15 L15,144.40 L18,138.43 L21,134.63 L24,125.28 L27,120.82 L30,113.87 L33,111.23 L36,112.96 L39,117.81 L42,119.21 L45,126.25 L48,135.25 L51,143.06 L54,145.49 L57,146.42 L60,148.49 L63,140.07 L66,138.64 L69,128.91 L72,121.38 L75,115.59 L78,112.99 L81,114.68 L84,113.25 L87,119.70 L90,126.14 L93,131.65 L96,139.08 L99,141.61 L102,144.35 L105,145.12 L108,144.83 L111,138.46 L114,131.35 L117,125.86 L120,119.03 L123,113.86 L126,114.57" fill="none" stroke="#f0a868" stroke-width="2"
+              stroke-linejoin="round" stroke-linecap="round" opacity="0.95"/>
+      </g>
+    </g>
+    <g>
+      <rect x="515.0" y="44" width="170" height="116" rx="9"
+            fill="#0d2137" stroke="#1f4e75" stroke-width="1.5"/>
+      <rect x="515.0" y="44" width="170" height="3" rx="1.5" fill="#38bdf8" opacity="0.75"/>
+      <text x="600.0" y="74" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,'DejaVu Sans Mono',monospace"
+            font-size="15" font-weight="700" fill="#e8f3fb" letter-spacing="1.6">FILTER</text>
+      <text x="600.0" y="94" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,'DejaVu Sans Mono',monospace"
+            font-size="11" fill="#7d9db4" letter-spacing="0.8">anti-alias</text>
+      <g transform="translate(537.0,0)">
+        <path d="M0,130.00 L3,136.77 L6,142.42 L9,146.02 L12,146.96 L15,145.09 L18,140.73 L21,134.59 L24,127.69 L27,121.17 L30,116.11 L33,113.36 L36,113.36 L39,116.11 L42,121.17 L45,127.69 L48,134.59 L51,140.73 L54,145.09 L57,146.96 L60,146.02 L63,142.42 L66,136.77 L69,130.00 L72,123.23 L75,117.58 L78,113.98 L81,113.04 L84,114.91 L87,119.27 L90,125.41 L93,132.31 L96,138.83 L99,143.89 L102,146.64 L105,146.64 L108,143.89 L111,138.83 L114,132.31 L117,125.41 L120,119.27 L123,114.91 L126,113.04" fill="none" stroke="#7dd3fc" stroke-width="2"
+              stroke-linejoin="round" stroke-linecap="round" opacity="0.95"/>
+      </g>
+    </g>
+    <g>
+      <rect x="740.0" y="44" width="170" height="116" rx="9"
+            fill="#0d2137" stroke="#1f4e75" stroke-width="1.5"/>
+      <rect x="740.0" y="44" width="170" height="3" rx="1.5" fill="#38bdf8" opacity="0.75"/>
+      <text x="825.0" y="74" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,'DejaVu Sans Mono',monospace"
+            font-size="15" font-weight="700" fill="#e8f3fb" letter-spacing="1.6">ADC</text>
+      <text x="825.0" y="94" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,'DejaVu Sans Mono',monospace"
+            font-size="11" fill="#7d9db4" letter-spacing="0.8">quantise</text>
+      <g transform="translate(762.0,0)">
+        <path d="M0,130.00 L6,130.00 L6,142.75 L12,142.75 L12,147.00 L18,147.00 L18,140.62 L24,140.62 L24,127.88 L30,127.88 L30,115.12 L36,115.12 L36,113.00 L42,113.00 L42,121.50 L48,121.50 L48,134.25 L54,134.25 L54,144.88 L60,144.88 L60,147.00 L66,147.00 L66,136.38 L72,136.38 L72,123.62 L78,123.62 L78,113.00 L84,113.00 L84,115.12 L90,115.12 L90,125.75 L96,125.75 L96,138.50 L102,138.50 L102,147.00 L108,147.00 L108,144.88 L114,144.88 L114,132.12 L120,132.12 L120,119.38 L126,119.38 L126,113.00" fill="none" stroke="#7dd3fc" stroke-width="2"
+              stroke-linejoin="round" stroke-linecap="round" opacity="0.95"/>
+      </g>
+    </g>
+    <g>
+      <rect x="965.0" y="44" width="170" height="116" rx="9"
+            fill="#0d2137" stroke="#1f4e75" stroke-width="1.5"/>
+      <rect x="965.0" y="44" width="170" height="3" rx="1.5" fill="#38bdf8" opacity="0.75"/>
+      <text x="1050.0" y="74" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,'DejaVu Sans Mono',monospace"
+            font-size="15" font-weight="700" fill="#e8f3fb" letter-spacing="1.6">UART</text>
+      <text x="1050.0" y="94" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,'DejaVu Sans Mono',monospace"
+            font-size="11" fill="#7d9db4" letter-spacing="0.8">serial out</text>
+      <g transform="translate(987.0,0)">
+        <path d="M0.00,116.00 L15.75,116.00 L15.75,116.00 L15.75,144.00 L31.50,144.00 L31.50,144.00 L31.50,116.00 L47.25,116.00 L47.25,116.00 L63.00,116.00 L63.00,116.00 L63.00,144.00 L78.75,144.00 L78.75,144.00 L94.50,144.00 L94.50,144.00 L94.50,116.00 L110.25,116.00 L110.25,116.00 L110.25,144.00 L126.00,144.00" fill="none" stroke="#5ee9a4" stroke-width="2"
+              stroke-linejoin="round" stroke-linecap="round" opacity="0.95"/>
+      </g>
+    </g>
+    
+    <circle cx="150.0" cy="102.0" r="6" fill="#5ee9a4" filter="url(#g2)" opacity="0.95">
+      <animate attributeName="cx" values="150.0;375.0;600.0;825.0;1050.0" keyTimes="0.0000;0.2500;0.5000;0.7500;1.0000"
+               dur="4.4s" repeatCount="indefinite" calcMode="linear"/>
+      <animate attributeName="opacity" values="0;1;1;1;0" dur="4.4s" repeatCount="indefinite"/>
+    </circle>
+    <rect x="0.75" y="0.75" width="1198.5" height="208.5" rx="12"
+          fill="none" stroke="#1f4e75" stroke-width="1.5" opacity="0.6"/>
+  </g>
+</svg>
