@@ -1,16 +1,4 @@
-# ============================================================
-# Contribution snake animation
-# ------------------------------------------------------------
-# Save this file in your PROFILE repo (github.com/ninocity3/ninocity3)
-# at this exact path:   .github/workflows/snake.yml
-#
-# Then: Actions tab -> "Generate snake animation" -> Run workflow.
-# It creates an "output" branch holding snake.svg, which the README
-# image URL points at. After the first run it updates itself daily.
-#
-# One-time setting: Settings -> Actions -> General ->
-# Workflow permissions -> "Read and write permissions" -> Save.
-# ============================================================
+
 
 name: Generate snake animation
 
