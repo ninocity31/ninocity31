@@ -1,0 +1,370 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage{fontspec}
+\usepackage[french]{babel}
+\frenchsetup{StandardLists=true,SmallCapsFigTabCaptions=false}
+\usepackage[a4paper,margin=2.5cm,headheight=16pt]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{float}
+\usepackage{needspace}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{caption}
+\usepackage{siunitx}
+\usepackage{tikz}
+\usepackage[european,siunitx]{circuitikz}
+\usetikzlibrary{arrows.meta,positioning,calc}
+
+% ---------- Couleurs ----------
+\definecolor{bleu}{RGB}{0,67,130}
+\definecolor{rouge}{RGB}{181,54,28}
+\definecolor{fond}{RGB}{233,238,245}
+\definecolor{gris}{RGB}{138,138,138}
+\definecolor{noir}{RGB}{26,26,26}
+
+\usepackage[colorlinks=true,linkcolor=bleu,citecolor=bleu,urlcolor=bleu]{hyperref}
+
+% ---------- Unités ----------
+\sisetup{output-decimal-marker={,},per-mode=power,detect-all}
+
+% ---------- Titres ----------
+\titleformat{\section}{\Large\bfseries\color{bleu}}{\thesection}{1em}{}
+\titleformat{\subsection}{\large\bfseries\color{bleu}}{\thesubsection}{1em}{}
+\titlespacing*{\section}{0pt}{3.0ex plus 1ex minus .2ex}{2.0ex plus .2ex}
+\titlespacing*{\subsection}{0pt}{2.5ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+% ---------- Légendes ----------
+\DeclareCaptionLabelSeparator{deuxpoints}{\NoAutoSpacing{:}\ }
+\captionsetup{labelfont={bf,color=bleu},labelsep=deuxpoints,font=normalsize}
+\captionsetup[table]{position=below}
+
+% ---------- En-têtes ----------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\itshape Compte-rendu – TP VNA}
+\fancyhead[R]{\itshape ENSIL-ENSCI – Électronique \& Télécommunications}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\setlist[itemize]{label=\textbullet}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.6em}
+
+\newcommand{\arel}{\textcolor{gris}{…}}
+
+\begin{document}
+
+% ================= Page de titre =================
+\begin{center}
+  ENSIL-ENSCI – Université de Limoges\\
+  Spécialité Électronique \& Télécommunications – Travaux Pratiques Hyperfréquences\\[4pt]
+  {\Large\bfseries\color{bleu} Compte-rendu – TP VNA}\\[6pt]
+  {\bfseries Analyse vectorielle de réseaux – Application à un TEC}\\[6pt]
+  Mouradi Souhail \ – Otmane Elbacha \ – Jawher TABBABI \quad – \quad Date : 16 octobre 2026\\[2pt]
+  {\small\itshape La mise en page de ce document a été réalisée à l’aide de l’assistant IA Claude (Anthropic).}
+\end{center}
+
+\vspace{0.8em}
+{\color{bleu}\rule{\linewidth}{1.2pt}}
+\vspace{1.0em}
+
+% ================= 1 =================
+\section{Objectif}
+
+L’objectif de ce TP est d’utiliser l’analyseur vectoriel de réseaux HP~8753C pour mesurer les
+paramètres $S$ d’un transistor à effet de champ (TEC FUJITSU FLK012) dans la bande
+\SIrange{2,95}{3,05}{\giga\hertz}. Il faut d’abord étalonner l’analyseur, puis polariser
+correctement le TEC, et enfin comparer les mesures aux données du constructeur.
+
+% ================= 2 =================
+\section{Partie théorique}
+
+\textbf{Paramètres $S$.} Un quadripôle est décrit par les ondes incidentes $a_i$ et réfléchies
+$b_i$ sur chaque accès. Elles sont liées par la matrice $S$ :
+\begin{equation}
+  \begin{pmatrix} b_1 \\ b_2 \end{pmatrix} =
+  \begin{pmatrix} S_{11} & S_{12} \\ S_{21} & S_{22} \end{pmatrix}
+  \begin{pmatrix} a_1 \\ a_2 \end{pmatrix}
+  \qquad\text{avec}\qquad
+  S_{ij} = \left.\frac{b_i}{a_j}\right|_{a_k = 0,\ k \neq j}
+  \label{eq:S}
+\end{equation}
+
+\textbf{Principe de l’analyseur.} Un wobulateur interne excite le dispositif sous test (DST) sur
+l’accès~1 ou l’accès~2, selon la position d’un commutateur. L’accès non utilisé est fermé sur une
+charge adaptée \SI{50}{\ohm}, ce qui impose $a_2 = 0$ ou $a_1 = 0$. Deux coupleurs
+bidirectionnels prélèvent des ondes $a_{iM}$ et $b_{jM}$ proportionnelles à $a_i$ et $b_j$
+(Figure~\ref{fig:vna}). Après changement de fréquence (mélangeurs), on obtient deux signaux BF
+$x(t)$ et $y(t)$ : le rapport de leurs amplitudes donne $|b_j/a_i|$ et leur déphasage donne
+$\arg(b_j/a_i)$.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[font=\scriptsize,
+  bloc/.style={draw,fill=fond,minimum height=0.6cm,align=center},
+  fl/.style={-{Stealth[length=4pt]}},
+  onde/.style={-{Stealth[length=4pt]},bleu,thick}]
+  % Générateur et commutateur
+  \draw (0,3.3) circle (0.28);
+  \draw (-0.15,3.3) sin (-0.07,3.4) cos (0,3.3) sin (0.07,3.2) cos (0.15,3.3);
+  \node[right=6pt] at (0.28,3.3) {Wobulateur};
+  \draw (0,3.02) -- (0,2.6);
+  \draw[thick] (0,2.6) -- (-0.5,2.25);
+  \fill (0,2.6) circle (1.2pt);
+  \node[right] at (0.1,2.45) {Commutateur};
+  \draw (-0.5,2.2) -- (-3.6,2.2) -- (-3.6,0.25);
+  \draw[dashed] (0.5,2.2) -- (3.6,2.2) -- (3.6,0.25);
+  % charge adaptée
+  \draw (0.5,2.2) -- (0.5,1.9);
+  \draw[fill=white] (0.38,1.9) rectangle (0.62,1.45);
+  \draw (0.5,1.45) -- (0.5,1.3);
+  \draw (0.3,1.3) -- (0.7,1.3);
+  \draw (0.37,1.22) -- (0.63,1.22);
+  \draw (0.44,1.14) -- (0.56,1.14);
+  \node[right,align=left] at (0.65,1.62) {Charge\\[-2pt]\SI{50}{\ohm}};
+  % Coupleurs et DST
+  \node[bloc,minimum width=1.6cm] (c1) at (-3.6,0) {Coupleur};
+  \node[bloc,minimum width=1.6cm] (c2) at (3.6,0) {Coupleur};
+  \node[above left=1pt and -2pt of c1.north west] {Port 1};
+  \node[above right=1pt and -2pt of c2.north east] {Port 2};
+  \node[draw,fill=fond,minimum width=1.2cm,minimum height=1.3cm,align=center,thick] (dst) at (0,0) {DST\\(TEC)};
+  \draw (c1.east) -- (dst.west);
+  \draw (dst.east) -- (c2.west);
+  \draw[onde] (-2.0,0.18) -- (-1.0,0.18) node[midway,above] {$a_1$};
+  \draw[onde] (-1.0,-0.18) -- (-2.0,-0.18) node[midway,below] {$b_1$};
+  \draw[onde] (2.0,0.18) -- (1.0,0.18) node[midway,above] {$a_2$};
+  \draw[onde] (1.0,-0.18) -- (2.0,-0.18) node[midway,below] {$b_2$};
+  \draw[rouge,densely dashed] (-0.85,-1.0) -- (-0.85,1.0);
+  \draw[rouge,densely dashed] (0.85,-1.0) -- (0.85,1.0);
+  \node[rouge] at (0,-1.2) {Plans de référence};
+  % Boîte de commutation
+  \node[bloc,minimum width=9cm] (bc) at (0,-2.3) {Boîte de commutation};
+  \draw[fl] ($(c1.south)+(-0.4,0)$) -- ($(c1.south)+(-0.4,-1.7)$) node[pos=0.45,left] {$a_{1M}$};
+  \draw[fl] ($(c1.south)+(0.4,0)$) -- ($(c1.south)+(0.4,-1.7)$) node[pos=0.45,right] {$b_{1M}$};
+  \draw[fl] ($(c2.south)+(-0.4,0)$) -- ($(c2.south)+(-0.4,-1.7)$) node[pos=0.45,left] {$a_{2M}$};
+  \draw[fl] ($(c2.south)+(0.4,0)$) -- ($(c2.south)+(0.4,-1.7)$) node[pos=0.45,right] {$b_{2M}$};
+  % Mélangeurs
+  \node[draw,circle,fill=white,inner sep=0pt,minimum size=0.55cm] (m1) at (-2.2,-3.8) {$\times$};
+  \node[draw,circle,fill=white,inner sep=0pt,minimum size=0.55cm] (m2) at (2.2,-3.8) {$\times$};
+  \draw[fl] (-2.2,-2.6) -- (m1.north) node[midway,left] {$b_{jM}$};
+  \draw[fl] (2.2,-2.6) -- (m2.north) node[midway,right] {$a_{iM}$};
+  \draw (m1.east) -- (m2.west) node[midway,above] {OL};
+  \node[left=2pt of m1] {Mélangeur};
+  \node[right=2pt of m2] {Mélangeur};
+  % Traitement BF
+  \node[bloc,minimum width=6cm] (bf) at (0,-5.2) {Récepteur FI : rapport d’amplitude $X/Y$ et déphasage $\Delta\Phi$};
+  \draw[fl] (m1.south) -- (-2.2,-4.9) node[midway,left] {$x(t)$};
+  \draw[fl] (m2.south) -- (2.2,-4.9) node[midway,right] {$y(t)$};
+  \node[bloc,minimum width=3cm] (af) at (0,-6.3) {Affichage $S_{ij}$};
+  \draw[fl] (bf.south) -- (af.north);
+  \node[bleu,font=\scriptsize\itshape] at (0,-7.0) {Flèches bleues : ondes de puissance dans les plans de référence};
+\end{tikzpicture}
+\caption{Synoptique simplifié de l’analyseur vectoriel de réseaux.}
+\label{fig:vna}
+\end{figure}
+
+\textbf{Étalonnage.} Les coupleurs, les câbles et le commutateur ne sont pas parfaits (directivité
+finie, désadaptation, fuites). Ces défauts sont décrits par un modèle d’erreur à 12 termes : 6 par
+sens de mesure (directivité, adaptation de source, réponse en réflexion, réponse en transmission,
+adaptation de charge, isolation). On les détermine en mesurant des standards connus :
+\begin{itemize}
+  \item \textbf{SOLT} (\textit{Short, Open, Load, Thru}) : court-circuit, circuit ouvert,
+        charge \SI{50}{\ohm} et liaison directe. Les plans de référence sont au bout des câbles ;
+  \item \textbf{TRL} (\textit{Thru, Reflect, Line}) : réalisé avec des standards dans la même
+        technologie que le boîtier. Il ramène les plans de référence aux bornes du transistor seul.
+\end{itemize}
+L’étalonnage n’est valable que dans la bande de fréquence et pour la puissance choisies.
+
+\textbf{TEC.} Le courant de drain $I_D$ est commandé par la tension grille-source $V_{GS}$
+($-V_P < V_{GS} < 0$). Sur les caractéristiques $I_D(V_{DS})$, on distingue la zone ohmique, la
+zone saturée (amplification), la zone d’avalanche et la zone de conduction de la diode
+grille. Le point de repos doit être dans la zone saturée. Une incursion dans la zone
+d’avalanche détruit le transistor.
+
+\textbf{Stabilité et gain.} À partir des paramètres $S$, on calcule le facteur de stabilité :
+\begin{equation}
+  K = \frac{1 - |S_{11}|^2 - |S_{22}|^2 + |\Delta|^2}{2\,|S_{12}\,S_{21}|}
+  \qquad\text{avec}\qquad
+  \Delta = S_{11}S_{22} - S_{12}S_{21}
+  \label{eq:K}
+\end{equation}
+Le TEC est inconditionnellement stable si $K > 1$ et $|\Delta| < 1$. Le gain maximum est alors
+$G_{\max} = \frac{|S_{21}|}{|S_{12}|}\bigl(K - \sqrt{K^2 - 1}\bigr)$. Sinon, on utilise le gain
+maximum stable $\mathrm{MSG} = |S_{21}|/|S_{12}|$.
+
+% ================= 3 =================
+\section{Étalonnage SOLT de l’analyseur}
+
+L’analyseur HP~8753C est associé au tiroir de test HP~85047A. Les réglages sont donnés dans le
+Tableau~\ref{tab:reglages}.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{ll}
+\toprule
+\textbf{Réglage} & \textbf{Valeur} \\
+\midrule
+Bande de fréquence          & \SIrange{2,95}{3,05}{\giga\hertz} \\
+Puissance de la source      & \SI{-10}{dBm} \\
+Kit d’étalonnage            & APC \SI{7}{\milli\metre} \\
+Type d’étalonnage           & \textit{Full Two Ports} \\
+\bottomrule
+\end{tabular}
+\caption{Réglages de l’analyseur avant l’étalonnage.}
+\label{tab:reglages}
+\end{table}
+
+La puissance est réglée à \SI{-10}{dBm} \textbf{avant} l’étalonnage. Elle doit être faible pour
+que le TEC reste en régime petit signal, donc linéaire. Si on la change après, l’étalonnage n’est
+plus valable.
+
+L’étalonnage a été fait dans l’ordre suivant :
+\begin{itemize}
+  \item \textbf{Réflexion} : Short, Open et Load sur le port~1, puis sur le port~2 ;
+  \item \textbf{Transmission} : les deux câbles connectés ensemble (\textit{Thru}) ;
+  \item \textbf{Isolation} : les deux ports fermés sur une charge \SI{50}{\ohm}.
+\end{itemize}
+
+\subsection{Vérification de l’étalonnage}
+
+Pour valider l’étalonnage, on mesure des éléments dont on connaît la réponse
+(Tableau~\ref{tab:verif}).
+
+\begin{table}[H]
+\centering
+\begin{tabular}{llccc}
+\toprule
+\textbf{Montage} & \textbf{Paramètre} & \textbf{Module attendu} & \textbf{Phase attendue} & \textbf{Résultat} \\
+\midrule
+Câbles connectés  & $S_{21}$, $S_{12}$ & \SI{0}{dB}   & \SI{0}{\degree}   & Conforme \\
+(\textit{Thru})   & $S_{11}$, $S_{22}$ & très faible  & –                 & Conforme \\
+\midrule
+Court-circuit     & $S_{11}$, $S_{22}$ & \SI{0}{dB}   & \SI{180}{\degree} & Conforme \\
+\bottomrule
+\end{tabular}
+\caption{Vérification de l’étalonnage SOLT sur toute la bande.}
+\label{tab:verif}
+\end{table}
+
+Avec les câbles connectés, l’onde passe entièrement d’un port à l’autre sans déphasage :
+$|S_{21}| = |S_{12}| = \SI{0}{dB}$ et la phase est nulle. Il n’y a presque pas de réflexion.
+Avec le court-circuit, toute l’onde est réfléchie avec un signe opposé ($\Gamma = -1$) :
+$|S_{11}| = \SI{0}{dB}$ et la phase vaut \SI{180}{\degree}. Les traces obtenues sont plates sur
+toute la bande et correspondent aux valeurs attendues : l’étalonnage est validé. On peut donc
+passer à la mesure du TEC.
+
+% ================= 4 =================
+\needspace{10\baselineskip}
+\section{Mesure du TEC FLK012}
+
+\subsection{Montage et polarisation}
+
+Le TEC est placé dans le boîtier de test HP~85041A, pastille en bas. La grille est reliée au
+port~1, le drain au port~2, et les deux sources sont à la masse du boîtier. La polarisation
+continue est amenée par deux tés de polarisation (Figure~\ref{fig:polar}). La capacité laisse
+passer le signal RF et bloque le continu. La self bloque la RF et laisse passer le continu.
+
+\begin{figure}[H]
+\centering
+\begin{circuitikz}[scale=0.85,transform shape,font=\small]
+  % Té grille
+  \draw[densely dashed,bleu,fill=fond] (0.9,-0.7) rectangle (3.3,2.2);
+  \node[bleu] at (2.1,-1.0) {Té de polarisation};
+  \draw (0,0) node[left,align=right]{Entrée RF\\(port 1)} to[short,o-] (1,0) to[C] (2.6,0) coordinate(g);
+  \draw (g) to[L,*-] (2.6,2.0) -- (2.6,2.6) node[above]{$-V_P < V_{GS0} < 0$};
+  \draw (g) -- (4.6,0);
+  % TEC
+  \node[njfet,anchor=G] (Q) at (4.6,0) {};
+  \node[above] at ($(Q.G)+(-0.35,0)$) {G};
+  \node[left] at ($(Q.D)+(0,-0.15)$) {D};
+  \node[left] at ($(Q.S)+(0,0.15)$) {S};
+  \draw (Q.S) node[ground]{};
+  % Té drain
+  \draw[densely dashed,bleu,fill=fond] (6.5,0.6) rectangle (8.9,3.5);
+  \node[bleu] at (7.7,0.3) {Té de polarisation};
+  \draw (Q.D) |- (7.2,1.3) coordinate(d);
+  \draw (d) to[L,*-] (7.2,3.3) -- (7.2,3.9) node[above]{$V_{DS0} > 0$};
+  \draw (d) to[C] (8.8,1.3) to[short,-o] (9.6,1.3) node[right,align=left]{Sortie RF\\(port 2)};
+\end{circuitikz}
+\caption{Polarisation du TEC à travers deux tés de polarisation.}
+\label{fig:polar}
+\end{figure}
+
+Le point de repos choisi est en classe~A (Tableau~\ref{tab:polar}). La limitation en courant des
+alimentations est réglée pour que le courant de drain ne dépasse pas \SI{20}{\milli\ampere}.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{cccc}
+\toprule
+$V_{DS0}$ & $I_{D0}$ & $V_{GS0}$ & $I_{D,\max}$ \\
+\midrule
+\SI{3}{\volt} & \SI{10}{\milli\ampere} & \SI{-0,4}{\volt} & \SI{20}{\milli\ampere} \\
+\bottomrule
+\end{tabular}
+\caption{Point de polarisation en classe A.}
+\label{tab:polar}
+\end{table}
+
+L’ordre des opérations est important pour ne pas détruire le transistor :
+\begin{itemize}
+  \item \textbf{polarisation} : vérifier les polarités ($V_{GS} < 0$, $V_{DS} > 0$, masse
+        commune), régler les deux tensions à \SI{0}{\volt}, connecter la grille puis le drain,
+        amener $V_{GS0}$ à \SI{-0,4}{\volt}, puis monter $V_{DS0}$ jusqu’à \SI{3}{\volt} ;
+  \item \textbf{dépolarisation} : descendre $V_{DS0}$ puis $V_{GS0}$ à \SI{0}{\volt},
+        déconnecter le drain et la grille, puis couper les alimentations.
+\end{itemize}
+Il ne faut jamais augmenter $V_{DS0}$ quand $V_{GS0} = \SI{0}{\volt}$ : l’avalanche est alors
+brutale et irréversible.
+
+\subsection{Mesure des paramètres $S$}
+
+L’étalonnage SOLT donne les paramètres $S$ du TEC aux bornes du boîtier : ils incluent les
+accès du boîtier. Pour obtenir les paramètres du transistor seul, un étalonnage TRL est fait avec
+le kit TRL-Bis dans la même bande. Les standards utilisés sont : THRU (avec cale), LINE (sans
+cale) et SHORT. Les relevés à \SI{3}{\giga\hertz} seront regroupés dans le
+Tableau~\ref{tab:S}.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{c cc cc cc}
+\toprule
+ & \multicolumn{2}{c}{\textbf{Boîtier (SOLT)}} & \multicolumn{2}{c}{\textbf{Transistor (TRL)}} & \multicolumn{2}{c}{\textbf{Constructeur}} \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-7}
+\textbf{Paramètre} & $|S|$ (dB) & $\varphi$ (°) & $|S|$ (dB) & $\varphi$ (°) & $|S|$ (dB) & $\varphi$ (°) \\
+\midrule
+$S_{11}$ & \arel & \arel & \arel & \arel & \arel & \arel \\
+$S_{21}$ & \arel & \arel & \arel & \arel & \arel & \arel \\
+$S_{12}$ & \arel & \arel & \arel & \arel & \arel & \arel \\
+$S_{22}$ & \arel & \arel & \arel & \arel & \arel & \arel \\
+\bottomrule
+\end{tabular}
+\caption{Paramètres $S$ du TEC à \SI{3}{\giga\hertz}, $V_{DS0} = \SI{3}{\volt}$, $I_{D0} = \SI{10}{\milli\ampere}$.}
+\label{tab:S}
+\end{table}
+
+On s’attend à $|S_{21}| > \SI{0}{dB}$ (le TEC amplifie) et à $|S_{12}|$ très faible (le TEC est
+presque unilatéral). Les écarts entre SOLT et TRL viennent des accès du boîtier, qui ajoutent
+des pertes et un déphasage. Les valeurs TRL doivent être les plus proches de celles du
+constructeur. Les mesures permettront ensuite de calculer $K$ et $|\Delta|$ avec
+l’équation~(\ref{eq:K}).
+
+% ================= 5 =================
+\section{Conclusion}
+
+L’analyseur a été étalonné en SOLT \textit{Full Two Ports} dans la bande
+\SIrange{2,95}{3,05}{\giga\hertz}, avec une puissance de \SI{-10}{dBm}. La vérification avec les
+câbles connectés ($\SI{0}{dB}$, \SI{0}{\degree}) et avec le court-circuit ($\SI{0}{dB}$,
+\SI{180}{\degree}) donne les valeurs attendues : l’étalonnage est validé.
+
+La suite du TP porte sur la polarisation du TEC FLK012 en classe~A ($V_{DS0} = \SI{3}{\volt}$,
+$I_{D0} = \SI{10}{\milli\ampere}$), puis sur la mesure de ses paramètres $S$ et leur comparaison
+avec la notice du constructeur.
+
+\end{document}
