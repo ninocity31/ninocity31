@@ -192,8 +192,8 @@ L’analyseur voit donc trois quadripôles en cascade : accès~A, TEC, accès~B
   [T_{\mathrm{TEC}}] = [T_A]^{-1}\,[T_{\mathrm{mes}}]\,[T_B]^{-1}
   \label{eq:cascade}
 \end{equation}
-Retirer l’effet des accès revient à déplacer les plans de référence jusqu’aux bornes du
-transistor. C’est le rôle de l’étalonnage TRL (§\,\ref{sec:trl}).
+Retirer l’effet des accès revient à déplacer les plans de référence des connecteurs jusqu’aux
+bornes du transistor. C’est ce que permet l’étalonnage TRL fait dans la suite du TP.
 
 \begin{figure}[H]
 \centering
@@ -210,52 +210,16 @@ transistor. C’est le rôle de l’étalonnage TRL (§\,\ref{sec:trl}).
   \draw[bleu,densely dashed] (3.6,-0.9) -- (3.6,1.0);
   \draw[rouge,densely dashed] (-1.0,-0.9) -- (-1.0,1.0);
   \draw[rouge,densely dashed] (1.0,-0.9) -- (1.0,1.0);
-  \node[bleu] at (-3.6,1.25) {plan SOLT};
-  \node[bleu] at (3.6,1.25) {plan SOLT};
-  \node[rouge] at (-1.0,-1.15) {plan TRL};
-  \node[rouge] at (1.0,-1.15) {plan TRL};
+  \node[bleu] at (-3.6,1.25) {connecteur};
+  \node[bleu] at (3.6,1.25) {connecteur};
+  \node[rouge] at (-1.0,-1.15) {borne TEC};
+  \node[rouge] at (1.0,-1.15) {borne TEC};
   \draw[decorate,decoration={brace,amplitude=5pt}] (-3.6,1.55) -- (3.6,1.55)
-     node[midway,above=5pt] {Boîtier HP~85041A : mesure après SOLT $= [T_A][T_{\mathrm{TEC}}][T_B]$};
+     node[midway,above=5pt] {Boîtier HP~85041A : $[T_{\mathrm{mes}}] = [T_A][T_{\mathrm{TEC}}][T_B]$};
 \end{tikzpicture}
 \caption{Le boîtier vu comme une cascade de trois quadripôles.}
 \label{fig:cascade}
 \end{figure}
-
-\subsection{Étalonnage SOLT et vérification}
-
-L’analyseur a des erreurs systématiques : coupleurs imparfaits, pertes et longueurs des câbles,
-fuites entre voies. On les corrige en mesurant des standards connus du kit APC~7 :
-Short, Open et Load sur chaque port, Thru entre les deux ports, puis l’isolation. Après
-l’étalonnage, les plans de référence sont au bout des câbles, c’est-à-dire à l’entrée du
-boîtier (plans SOLT de la Figure~\ref{fig:cascade}).
-
-Pour vérifier l’étalonnage, on mesure des éléments dont la réponse est connue. Une charge $Z$
-présente le coefficient de réflexion :
-\begin{equation}
-  \Gamma = \frac{Z - Z_0}{Z + Z_0} \qquad (Z_0 = \SI{50}{\ohm})
-  \label{eq:gamma}
-\end{equation}
-
-\begin{table}[H]
-\centering
-\begin{tabular}{lccc}
-\toprule
-\textbf{Élément} & \textbf{Valeur théorique} & \textbf{Module} & \textbf{Phase} \\
-\midrule
-Court-circuit ($Z = 0$)        & $\Gamma = -1$               & \SI{0}{dB}  & \SI{180}{\degree} \\
-Circuit ouvert ($Z \to \infty$) & $\Gamma = +1$              & \SI{0}{dB}  & \SI{0}{\degree} \\
-Charge adaptée ($Z = Z_0$)     & $\Gamma = 0$                & très faible & – \\
-Câbles connectés (\textit{Thru}) & $S_{21} = S_{12} = 1$, $S_{11} = S_{22} = 0$ & \SI{0}{dB} & \SI{0}{\degree} \\
-\bottomrule
-\end{tabular}
-\caption{Réponses théoriques utilisées pour vérifier l’étalonnage.}
-\label{tab:theo}
-\end{table}
-
-La puissance de la source est fixée à \SI{-10}{dBm}. À ce niveau, le TEC travaille en
-\textbf{petit signal} : il se comporte comme un quadripôle linéaire et ses paramètres $S$ ne
-dépendent pas de la puissance. L’étalonnage n’est valable que pour cette puissance et cette
-bande de fréquence.
 
 \subsection{Polarisation du TEC}
 
@@ -279,25 +243,9 @@ On en déduit les règles du TP :
 Les paramètres $S$ d’un transistor dépendent de son point de polarisation. Ils sont donc
 toujours donnés avec $V_{DS0}$ et $I_{D0}$.
 
-\subsection{Étalonnage TRL}
-\label{sec:trl}
-
-L’étalonnage SOLT demande des standards parfaitement connus, que l’on ne sait pas réaliser à
-l’intérieur du boîtier. L’étalonnage TRL utilise des standards plus simples, placés dans le
-boîtier lui-même (kit TRL-Bis) :
-\begin{itemize}
-  \item \textbf{Thru} (avec cale) : les deux accès sont reliés directement. Il fixe la position
-        des plans de référence, aux bornes du transistor ;
-  \item \textbf{Reflect} (ici le Short) : une forte réflexion, identique sur les deux ports. Sa
-        valeur exacte n’a pas besoin d’être connue ;
-  \item \textbf{Line} (sans cale) : une ligne \SI{50}{\ohm} plus longue que le Thru. Elle fixe
-        l’impédance de référence. Son déphasage supplémentaire $\Delta\varphi = \beta\,\Delta L$
-        doit rester entre \SI{20}{\degree} et \SI{160}{\degree} dans la bande (idéalement
-        \SI{90}{\degree}, soit $\Delta L = \lambda/4$) pour que le calcul soit précis.
-\end{itemize}
-L’analyseur calcule alors $[T_A]$ et $[T_B]$ et applique l’équation~(\ref{eq:cascade}). On obtient
-directement les paramètres $S$ du transistor seul, que l’on peut comparer à la notice du
-constructeur.
+Enfin, la puissance RF envoyée sur le TEC est de \SI{-10}{dBm}. À ce niveau, le TEC travaille en
+\textbf{petit signal} : il se comporte comme un quadripôle linéaire et ses paramètres $S$ ne
+dépendent pas de la puissance.
 
 % ================= 3 =================
 \section{Étalonnage SOLT de l’analyseur}
@@ -352,8 +300,10 @@ Court-circuit     & $S_{11}$, $S_{22}$ & \SI{0}{dB}   & \SI{180}{\degree} & Conf
 \label{tab:verif}
 \end{table}
 
-Les traces obtenues sont plates sur toute la bande et correspondent aux valeurs théoriques du
-Tableau~\ref{tab:theo} : l’étalonnage est validé. On peut donc passer à la mesure du TEC.
+Avec les câbles connectés, on retrouve $|S_{21}| = |S_{12}| = \SI{0}{dB}$ avec une phase nulle :
+l’onde passe entièrement d’un port à l’autre. Avec le court-circuit ($\Gamma = -1$), on retrouve
+$|S_{11}| = \SI{0}{dB}$ et une phase de \SI{180}{\degree}. Les traces sont plates sur toute la
+bande : l’étalonnage est validé. On peut donc passer à la mesure du TEC.
 
 % ================= 4 =================
 \needspace{10\baselineskip}
