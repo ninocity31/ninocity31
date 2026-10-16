@@ -22,7 +22,7 @@
 \usepackage{siunitx}
 \usepackage{tikz}
 \usepackage[european,siunitx]{circuitikz}
-\usetikzlibrary{arrows.meta,positioning,calc,babel}
+\usetikzlibrary{arrows.meta,positioning,calc,babel,decorations.pathreplacing}
 
 % ---------- Couleurs ----------
 \definecolor{bleu}{RGB}{0,67,130}
@@ -121,11 +121,9 @@ Le banc de mesure est présenté sur la Figure~\ref{fig:banc}. Chaque élément 
         l’analyseur. Une self de choc laisse passer le continu et empêche la RF de partir vers
         l’alimentation. Dans ce TP, ces éléments sont internes aux tés que nous utilisons.
 
-  \item \textbf{Boîtier de test pour transistor HP~85041A.} Il reçoit le TEC, pastille en bas,
-        grille côté port~1 et drain côté port~2. Les deux sources sont reliées à la masse du
-        boîtier. Il fait le passage entre les connecteurs coaxiaux et les pattes du transistor.
-        Ses accès ajoutent des pertes et un déphasage : c’est pourquoi un étalonnage TRL est
-        ensuite nécessaire.
+  \item \textbf{Boîtier de test pour transistor HP~85041A.} Il reçoit le TEC et fait le
+        passage entre les connecteurs coaxiaux et les pattes du transistor. Il est détaillé
+        dans la partie théorique.
 
   \item \textbf{Kit TRL-Bis.} Ce sont des standards qui se placent dans le boîtier de test :
         THRU (avec cale), LINE (sans cale) et SHORT. Ils permettent de ramener les plans de
@@ -163,118 +161,143 @@ Le banc de mesure est présenté sur la Figure~\ref{fig:banc}. Chaque élément 
 % ================= 2 =================
 \section{Partie théorique}
 
-\textbf{Paramètres $S$.} Un quadripôle est décrit par les ondes incidentes $a_i$ et réfléchies
-$b_i$ sur chaque accès. Elles sont liées par la matrice $S$ :
-\begin{equation}
-  \begin{pmatrix} b_1 \\ b_2 \end{pmatrix} =
-  \begin{pmatrix} S_{11} & S_{12} \\ S_{21} & S_{22} \end{pmatrix}
-  \begin{pmatrix} a_1 \\ a_2 \end{pmatrix}
-  \qquad\text{avec}\qquad
-  S_{ij} = \left.\frac{b_i}{a_j}\right|_{a_k = 0,\ k \neq j}
-  \label{eq:S}
-\end{equation}
+Cette partie explique, dans l’ordre du TP, ce que l’on fait et pourquoi.
 
-\textbf{Principe de l’analyseur.} Un wobulateur interne excite le dispositif sous test (DST) sur
-l’accès~1 ou l’accès~2, selon la position d’un commutateur. L’accès non utilisé est fermé sur une
-charge adaptée \SI{50}{\ohm}, ce qui impose $a_2 = 0$ ou $a_1 = 0$. Deux coupleurs
-bidirectionnels prélèvent des ondes $a_{iM}$ et $b_{jM}$ proportionnelles à $a_i$ et $b_j$
-(Figure~\ref{fig:vna}). Après changement de fréquence (mélangeurs), on obtient deux signaux BF
-$x(t)$ et $y(t)$ : le rapport de leurs amplitudes donne $|b_j/a_i|$ et leur déphasage donne
-$\arg(b_j/a_i)$.
+\subsection{Le boîtier de test HP~85041A}
+
+Un transistor hyperfréquence en boîtier à pattes ne peut pas être branché directement sur un
+câble coaxial. Le HP~85041A sert d’interface entre les deux. Il comporte :
+\begin{itemize}
+  \item deux connecteurs APC~7, reliés au port~1 et au port~2 de l’analyseur ;
+  \item deux \textbf{lignes d’accès} qui amènent le signal des connecteurs jusqu’aux pattes du
+        transistor ;
+  \item au centre, un bloc métallique relié à la masse. Les deux pattes de source y sont
+        plaquées : le TEC est donc monté en \textbf{source commune} ;
+  \item un système de serrage qui plaque la grille sur la ligne du port~1 et le drain sur la
+        ligne du port~2. Le transistor est posé pastille en bas pour respecter ce sens.
+\end{itemize}
+La polarisation continue passe aussi par les lignes d’accès jusqu’à la grille et au drain.
+
+Le boîtier n’est pas transparent. Chaque ligne d’accès de longueur $L$ ajoute un déphasage,
+un peu de pertes, et les transitions coaxial–ligne créent une petite désadaptation :
+\begin{equation}
+  \varphi = \beta L = \frac{2\pi f \sqrt{\varepsilon_{\mathrm{eff}}}}{c}\,L
+  \label{eq:phi}
+\end{equation}
+L’analyseur voit donc trois quadripôles en cascade : accès~A, TEC, accès~B
+(Figure~\ref{fig:cascade}). Avec les matrices chaîne $[T]$, qui se multiplient en cascade :
+\begin{equation}
+  [T_{\mathrm{mes}}] = [T_A]\,[T_{\mathrm{TEC}}]\,[T_B]
+  \quad\Longrightarrow\quad
+  [T_{\mathrm{TEC}}] = [T_A]^{-1}\,[T_{\mathrm{mes}}]\,[T_B]^{-1}
+  \label{eq:cascade}
+\end{equation}
+Retirer l’effet des accès revient à déplacer les plans de référence jusqu’aux bornes du
+transistor. C’est le rôle de l’étalonnage TRL (§\,\ref{sec:trl}).
 
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}[font=\scriptsize,
-  bloc/.style={draw,fill=fond,minimum height=0.6cm,align=center},
-  fl/.style={-{Stealth[length=4pt]}},
-  onde/.style={-{Stealth[length=4pt]},bleu,thick}]
-  % Générateur et commutateur
-  \draw (0,3.3) circle (0.28);
-  \draw (-0.15,3.3) sin (-0.07,3.4) cos (0,3.3) sin (0.07,3.2) cos (0.15,3.3);
-  \node[right=6pt] at (0.28,3.3) {Wobulateur};
-  \draw (0,3.02) -- (0,2.6);
-  \draw[thick] (0,2.6) -- (-0.5,2.25);
-  \fill (0,2.6) circle (1.2pt);
-  \node[right] at (0.1,2.45) {Commutateur};
-  \draw (-0.5,2.2) -- (-3.6,2.2) -- (-3.6,0.25);
-  \draw[dashed] (0.5,2.2) -- (3.6,2.2) -- (3.6,0.25);
-  % charge adaptée
-  \draw (0.5,2.2) -- (0.5,1.9);
-  \draw[fill=white] (0.38,1.9) rectangle (0.62,1.45);
-  \draw (0.5,1.45) -- (0.5,1.3);
-  \draw (0.3,1.3) -- (0.7,1.3);
-  \draw (0.37,1.22) -- (0.63,1.22);
-  \draw (0.44,1.14) -- (0.56,1.14);
-  \node[right,align=left] at (0.65,1.62) {Charge\\[-2pt]\SI{50}{\ohm}};
-  % Coupleurs et DST
-  \node[bloc,minimum width=1.6cm] (c1) at (-3.6,0) {Coupleur};
-  \node[bloc,minimum width=1.6cm] (c2) at (3.6,0) {Coupleur};
-  \node[above left=1pt and -2pt of c1.north west] {Port 1};
-  \node[above right=1pt and -2pt of c2.north east] {Port 2};
-  \node[draw,fill=fond,minimum width=1.2cm,minimum height=1.3cm,align=center,thick] (dst) at (0,0) {DST\\(TEC)};
-  \draw (c1.east) -- (dst.west);
-  \draw (dst.east) -- (c2.west);
-  \draw[onde] (-2.0,0.18) -- (-1.0,0.18) node[midway,above] {$a_1$};
-  \draw[onde] (-1.0,-0.18) -- (-2.0,-0.18) node[midway,below] {$b_1$};
-  \draw[onde] (2.0,0.18) -- (1.0,0.18) node[midway,above] {$a_2$};
-  \draw[onde] (1.0,-0.18) -- (2.0,-0.18) node[midway,below] {$b_2$};
-  \draw[rouge,densely dashed] (-0.85,-1.0) -- (-0.85,1.0);
-  \draw[rouge,densely dashed] (0.85,-1.0) -- (0.85,1.0);
-  \node[rouge] at (0,-1.2) {Plans de référence};
-  % Boîte de commutation
-  \node[bloc,minimum width=9cm] (bc) at (0,-2.3) {Boîte de commutation};
-  \draw[fl] ($(c1.south)+(-0.4,0)$) -- ($(c1.south)+(-0.4,-1.7)$) node[pos=0.45,left] {$a_{1M}$};
-  \draw[fl] ($(c1.south)+(0.4,0)$) -- ($(c1.south)+(0.4,-1.7)$) node[pos=0.45,right] {$b_{1M}$};
-  \draw[fl] ($(c2.south)+(-0.4,0)$) -- ($(c2.south)+(-0.4,-1.7)$) node[pos=0.45,left] {$a_{2M}$};
-  \draw[fl] ($(c2.south)+(0.4,0)$) -- ($(c2.south)+(0.4,-1.7)$) node[pos=0.45,right] {$b_{2M}$};
-  % Mélangeurs
-  \node[draw,circle,fill=white,inner sep=0pt,minimum size=0.55cm] (m1) at (-2.2,-3.8) {$\times$};
-  \node[draw,circle,fill=white,inner sep=0pt,minimum size=0.55cm] (m2) at (2.2,-3.8) {$\times$};
-  \draw[fl] (-2.2,-2.6) -- (m1.north) node[midway,left] {$b_{jM}$};
-  \draw[fl] (2.2,-2.6) -- (m2.north) node[midway,right] {$a_{iM}$};
-  \draw (m1.east) -- (m2.west) node[midway,above] {OL};
-  \node[left=2pt of m1] {Mélangeur};
-  \node[right=2pt of m2] {Mélangeur};
-  % Traitement BF
-  \node[bloc,minimum width=6cm] (bf) at (0,-5.2) {Récepteur FI : rapport d’amplitude $X/Y$ et déphasage $\Delta\Phi$};
-  \draw[fl] (m1.south) -- (-2.2,-4.9) node[midway,left] {$x(t)$};
-  \draw[fl] (m2.south) -- (2.2,-4.9) node[midway,right] {$y(t)$};
-  \node[bloc,minimum width=3cm] (af) at (0,-6.3) {Affichage $S_{ij}$};
-  \draw[fl] (bf.south) -- (af.north);
-  \node[bleu,font=\scriptsize\itshape] at (0,-7.0) {Flèches bleues : ondes de puissance dans les plans de référence};
+  bloc/.style={draw,fill=fond,minimum height=0.8cm,minimum width=1.6cm,align=center}]
+  \node[bloc] (A) at (-2.6,0) {Accès A\\$[T_A]$};
+  \node[draw,fill=fond,thick,minimum height=0.8cm,minimum width=1.6cm,align=center] (Q) at (0,0) {TEC\\$[T_{\mathrm{TEC}}]$};
+  \node[bloc] (B) at (2.6,0) {Accès B\\$[T_B]$};
+  \draw (-5.2,0) node[left,align=right] {Port 1\\(grille)} -- (A.west);
+  \draw (A.east) -- (Q.west);
+  \draw (Q.east) -- (B.west);
+  \draw (B.east) -- (5.2,0) node[right,align=left] {Port 2\\(drain)};
+  \draw[bleu,densely dashed] (-3.6,-0.9) -- (-3.6,1.0);
+  \draw[bleu,densely dashed] (3.6,-0.9) -- (3.6,1.0);
+  \draw[rouge,densely dashed] (-1.0,-0.9) -- (-1.0,1.0);
+  \draw[rouge,densely dashed] (1.0,-0.9) -- (1.0,1.0);
+  \node[bleu] at (-3.6,1.25) {plan SOLT};
+  \node[bleu] at (3.6,1.25) {plan SOLT};
+  \node[rouge] at (-1.0,-1.15) {plan TRL};
+  \node[rouge] at (1.0,-1.15) {plan TRL};
+  \draw[decorate,decoration={brace,amplitude=5pt}] (-3.6,1.55) -- (3.6,1.55)
+     node[midway,above=5pt] {Boîtier HP~85041A : mesure après SOLT $= [T_A][T_{\mathrm{TEC}}][T_B]$};
 \end{tikzpicture}
-\caption{Synoptique simplifié de l’analyseur vectoriel de réseaux.}
-\label{fig:vna}
+\caption{Le boîtier vu comme une cascade de trois quadripôles.}
+\label{fig:cascade}
 \end{figure}
 
-\textbf{Étalonnage.} Les coupleurs, les câbles et le commutateur ne sont pas parfaits (directivité
-finie, désadaptation, fuites). Ces défauts sont décrits par un modèle d’erreur à 12 termes : 6 par
-sens de mesure (directivité, adaptation de source, réponse en réflexion, réponse en transmission,
-adaptation de charge, isolation). On les détermine en mesurant des standards connus :
-\begin{itemize}
-  \item \textbf{SOLT} (\textit{Short, Open, Load, Thru}) : court-circuit, circuit ouvert,
-        charge \SI{50}{\ohm} et liaison directe. Les plans de référence sont au bout des câbles ;
-  \item \textbf{TRL} (\textit{Thru, Reflect, Line}) : réalisé avec des standards dans la même
-        technologie que le boîtier. Il ramène les plans de référence aux bornes du transistor seul.
-\end{itemize}
-L’étalonnage n’est valable que dans la bande de fréquence et pour la puissance choisies.
+\subsection{Étalonnage SOLT et vérification}
 
-\textbf{TEC.} Le courant de drain $I_D$ est commandé par la tension grille-source $V_{GS}$
-($-V_P < V_{GS} < 0$). Sur les caractéristiques $I_D(V_{DS})$, on distingue la zone ohmique, la
-zone saturée (amplification), la zone d’avalanche et la zone de conduction de la diode
-grille. Le point de repos doit être dans la zone saturée. Une incursion dans la zone
-d’avalanche détruit le transistor.
+L’analyseur a des erreurs systématiques : coupleurs imparfaits, pertes et longueurs des câbles,
+fuites entre voies. On les corrige en mesurant des standards connus du kit APC~7 :
+Short, Open et Load sur chaque port, Thru entre les deux ports, puis l’isolation. Après
+l’étalonnage, les plans de référence sont au bout des câbles, c’est-à-dire à l’entrée du
+boîtier (plans SOLT de la Figure~\ref{fig:cascade}).
 
-\textbf{Stabilité et gain.} À partir des paramètres $S$, on calcule le facteur de stabilité :
+Pour vérifier l’étalonnage, on mesure des éléments dont la réponse est connue. Une charge $Z$
+présente le coefficient de réflexion :
 \begin{equation}
-  K = \frac{1 - |S_{11}|^2 - |S_{22}|^2 + |\Delta|^2}{2\,|S_{12}\,S_{21}|}
-  \qquad\text{avec}\qquad
-  \Delta = S_{11}S_{22} - S_{12}S_{21}
-  \label{eq:K}
+  \Gamma = \frac{Z - Z_0}{Z + Z_0} \qquad (Z_0 = \SI{50}{\ohm})
+  \label{eq:gamma}
 \end{equation}
-Le TEC est inconditionnellement stable si $K > 1$ et $|\Delta| < 1$. Le gain maximum est alors
-$G_{\max} = \frac{|S_{21}|}{|S_{12}|}\bigl(K - \sqrt{K^2 - 1}\bigr)$. Sinon, on utilise le gain
-maximum stable $\mathrm{MSG} = |S_{21}|/|S_{12}|$.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{lccc}
+\toprule
+\textbf{Élément} & \textbf{Valeur théorique} & \textbf{Module} & \textbf{Phase} \\
+\midrule
+Court-circuit ($Z = 0$)        & $\Gamma = -1$               & \SI{0}{dB}  & \SI{180}{\degree} \\
+Circuit ouvert ($Z \to \infty$) & $\Gamma = +1$              & \SI{0}{dB}  & \SI{0}{\degree} \\
+Charge adaptée ($Z = Z_0$)     & $\Gamma = 0$                & très faible & – \\
+Câbles connectés (\textit{Thru}) & $S_{21} = S_{12} = 1$, $S_{11} = S_{22} = 0$ & \SI{0}{dB} & \SI{0}{\degree} \\
+\bottomrule
+\end{tabular}
+\caption{Réponses théoriques utilisées pour vérifier l’étalonnage.}
+\label{tab:theo}
+\end{table}
+
+La puissance de la source est fixée à \SI{-10}{dBm}. À ce niveau, le TEC travaille en
+\textbf{petit signal} : il se comporte comme un quadripôle linéaire et ses paramètres $S$ ne
+dépendent pas de la puissance. L’étalonnage n’est valable que pour cette puissance et cette
+bande de fréquence.
+
+\subsection{Polarisation du TEC}
+
+Un TEC n’amplifie que s’il est polarisé dans sa zone saturée. Dans cette zone, le courant de
+drain dépend surtout de la tension de grille :
+\begin{equation}
+  I_D \approx I_{DSS}\left(1 + \frac{V_{GS}}{V_P}\right)^{2}
+  \qquad\text{pour}\quad -V_P < V_{GS} < 0
+  \label{eq:id}
+\end{equation}
+On en déduit les règles du TP :
+\begin{itemize}
+  \item $V_{GS}$ doit rester négative, sinon la diode grille-canal conduit ;
+  \item à $V_{GS} = \SI{0}{\volt}$, le courant est maximal ($I_D = I_{DSS}$). Si on monte
+        $V_{DS}$ dans ce cas, on atteint vite la zone d’avalanche, qui détruit le transistor.
+        C’est pourquoi on règle toujours la grille \textbf{avant} le drain, et on descend le drain
+        \textbf{avant} la grille ;
+  \item en classe~A, le point de repos est au milieu de la zone saturée : le signal varie
+        autour de ce point sans couper ni saturer le transistor, le fonctionnement est linéaire.
+\end{itemize}
+Les paramètres $S$ d’un transistor dépendent de son point de polarisation. Ils sont donc
+toujours donnés avec $V_{DS0}$ et $I_{D0}$.
+
+\subsection{Étalonnage TRL}
+\label{sec:trl}
+
+L’étalonnage SOLT demande des standards parfaitement connus, que l’on ne sait pas réaliser à
+l’intérieur du boîtier. L’étalonnage TRL utilise des standards plus simples, placés dans le
+boîtier lui-même (kit TRL-Bis) :
+\begin{itemize}
+  \item \textbf{Thru} (avec cale) : les deux accès sont reliés directement. Il fixe la position
+        des plans de référence, aux bornes du transistor ;
+  \item \textbf{Reflect} (ici le Short) : une forte réflexion, identique sur les deux ports. Sa
+        valeur exacte n’a pas besoin d’être connue ;
+  \item \textbf{Line} (sans cale) : une ligne \SI{50}{\ohm} plus longue que le Thru. Elle fixe
+        l’impédance de référence. Son déphasage supplémentaire $\Delta\varphi = \beta\,\Delta L$
+        doit rester entre \SI{20}{\degree} et \SI{160}{\degree} dans la bande (idéalement
+        \SI{90}{\degree}, soit $\Delta L = \lambda/4$) pour que le calcul soit précis.
+\end{itemize}
+L’analyseur calcule alors $[T_A]$ et $[T_B]$ et applique l’équation~(\ref{eq:cascade}). On obtient
+directement les paramètres $S$ du transistor seul, que l’on peut comparer à la notice du
+constructeur.
 
 % ================= 3 =================
 \section{Étalonnage SOLT de l’analyseur}
@@ -298,9 +321,8 @@ Type d’étalonnage           & \textit{Full Two Ports} \\
 \label{tab:reglages}
 \end{table}
 
-La puissance est réglée à \SI{-10}{dBm} \textbf{avant} l’étalonnage. Elle doit être faible pour
-que le TEC reste en régime petit signal, donc linéaire. Si on la change après, l’étalonnage n’est
-plus valable.
+La puissance est réglée à \SI{-10}{dBm} \textbf{avant} l’étalonnage : si on la change après,
+l’étalonnage n’est plus valable.
 
 L’étalonnage a été fait dans l’ordre suivant :
 \begin{itemize}
@@ -330,12 +352,8 @@ Court-circuit     & $S_{11}$, $S_{22}$ & \SI{0}{dB}   & \SI{180}{\degree} & Conf
 \label{tab:verif}
 \end{table}
 
-Avec les câbles connectés, l’onde passe entièrement d’un port à l’autre sans déphasage :
-$|S_{21}| = |S_{12}| = \SI{0}{dB}$ et la phase est nulle. Il n’y a presque pas de réflexion.
-Avec le court-circuit, toute l’onde est réfléchie avec un signe opposé ($\Gamma = -1$) :
-$|S_{11}| = \SI{0}{dB}$ et la phase vaut \SI{180}{\degree}. Les traces obtenues sont plates sur
-toute la bande et correspondent aux valeurs attendues : l’étalonnage est validé. On peut donc
-passer à la mesure du TEC.
+Les traces obtenues sont plates sur toute la bande et correspondent aux valeurs théoriques du
+Tableau~\ref{tab:theo} : l’étalonnage est validé. On peut donc passer à la mesure du TEC.
 
 % ================= 4 =================
 \needspace{10\baselineskip}
@@ -430,8 +448,7 @@ $S_{22}$ & \arel & \arel & \arel & \arel & \arel & \arel \\
 On s’attend à $|S_{21}| > \SI{0}{dB}$ (le TEC amplifie) et à $|S_{12}|$ très faible (le TEC est
 presque unilatéral). Les écarts entre SOLT et TRL viennent des accès du boîtier, qui ajoutent
 des pertes et un déphasage. Les valeurs TRL doivent être les plus proches de celles du
-constructeur. Les mesures permettront ensuite de calculer $K$ et $|\Delta|$ avec
-l’équation~(\ref{eq:K}).
+constructeur.
 
 % ================= 5 =================
 \section{Conclusion}
