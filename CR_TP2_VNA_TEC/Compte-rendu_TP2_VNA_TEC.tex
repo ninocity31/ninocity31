@@ -85,6 +85,81 @@ paramètres $S$ d’un transistor à effet de champ (TEC FUJITSU FLK012) dans la
 \SIrange{2,95}{3,05}{\giga\hertz}. Il faut d’abord étalonner l’analyseur, puis polariser
 correctement le TEC, et enfin comparer les mesures aux données du constructeur.
 
+% ================= Matériel =================
+\section{Matériel utilisé}
+
+Le banc de mesure est présenté sur la Figure~\ref{fig:banc}. Chaque élément a un rôle précis :
+
+\begin{itemize}
+  \item \textbf{Analyseur vectoriel de réseaux HP~8753C.} C’est l’appareil de mesure principal.
+        Il contient la source hyperfréquence (wobulateur) qui balaye la bande choisie, les
+        récepteurs et l’écran. Il mesure le rapport entre l’onde réfléchie ou transmise et
+        l’onde incidente, en module et en phase. Il affiche directement les paramètres $S_{ij}$
+        (en dB, en degrés ou sur l’abaque de Smith). Il garde aussi en mémoire les termes
+        d’erreur de l’étalonnage pour corriger les mesures.
+
+  \item \textbf{Tiroir de test de paramètres $S$ HP~85047A.} Il est associé à l’analyseur et
+        porte les deux ports de mesure. Il contient le commutateur qui envoie la source sur le
+        port~1 ou sur le port~2, les coupleurs bidirectionnels qui prélèvent les ondes $a_i$
+        et $b_i$, et la charge adaptée du port non utilisé. Grâce à lui, les quatre paramètres
+        $S$ sont mesurés sans retourner le composant. Il possède aussi des entrées de
+        polarisation qui amènent le continu jusqu’aux ports.
+
+  \item \textbf{Câbles de mesure et kit d’étalonnage APC~\SI{7}{\milli\metre}.} Les câbles
+        relient les ports au boîtier de test. Le kit contient les standards connus utilisés pour
+        l’étalonnage SOLT : un court-circuit (Short), un circuit ouvert (Open) et une charge
+        \SI{50}{\ohm} (Load). APC~7 est un connecteur de précision \SI{7}{\milli\metre}, sans
+        sexe, très répétable : il convient bien aux mesures d’étalonnage.
+
+  \item \textbf{Deux alimentations continues.} L’une fournit la tension de grille
+        $V_{GS0} < 0$, l’autre la tension de drain $V_{DS0} > 0$, avec une masse commune.
+        Leur limitation en courant protège le transistor : le courant de drain ne doit pas
+        dépasser \SI{20}{\milli\ampere}.
+
+  \item \textbf{Tés de polarisation.} Ils superposent le continu et le signal RF sur le même
+        accès. Une capacité de découplage laisse passer la RF et bloque le continu vers
+        l’analyseur. Une self de choc laisse passer le continu et empêche la RF de partir vers
+        l’alimentation. Dans ce TP, ces éléments sont internes aux tés que nous utilisons.
+
+  \item \textbf{Boîtier de test pour transistor HP~85041A.} Il reçoit le TEC, pastille en bas,
+        grille côté port~1 et drain côté port~2. Les deux sources sont reliées à la masse du
+        boîtier. Il fait le passage entre les connecteurs coaxiaux et les pattes du transistor.
+        Ses accès ajoutent des pertes et un déphasage : c’est pourquoi un étalonnage TRL est
+        ensuite nécessaire.
+
+  \item \textbf{Kit TRL-Bis.} Ce sont des standards qui se placent dans le boîtier de test :
+        THRU (avec cale), LINE (sans cale) et SHORT. Ils permettent de ramener les plans de
+        référence aux bornes du transistor seul.
+
+  \item \textbf{Adaptateur d’impédance.} Il permet de modifier l’impédance vue par le TEC
+        pour l’adapter à \SI{50}{\ohm}. Il sert dans la suite du TP, pour réaliser
+        l’adaptation du transistor et obtenir un amplificateur bande étroite.
+
+  \item \textbf{Transistor FUJITSU FLK012.} C’est le composant mesuré : un TEC hyperfréquence
+        en boîtier à quatre pattes (une grille, un drain et deux sources).
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[font=\scriptsize,
+  bloc/.style={draw,fill=fond,minimum height=0.7cm,align=center},
+  fl/.style={-{Stealth[length=4pt]}}]
+  \node[bloc,minimum width=3.4cm] (alim) at (0,2.6) {Alimentations continues\\$V_{GS0}$ et $V_{DS0}$};
+  \node[bloc,minimum width=7.5cm,minimum height=1.0cm] (vna) at (0,1.0) {Analyseur HP~8753C + tiroir de test HP~85047A\\(source, commutateur, coupleurs, récepteurs)};
+  \draw[fl] ($(alim.south)+(-0.8,0)$) -- ($(vna.north)+(-0.8,0)$) node[midway,left] {$V_{GS0}$};
+  \draw[fl] ($(alim.south)+(0.8,0)$) -- ($(vna.north)+(0.8,0)$) node[midway,right] {$V_{DS0}$};
+  \node[draw,fill=fond,thick,minimum width=2.6cm,minimum height=1.1cm,align=center] (tec) at (0,-1.4) {Boîtier HP~85041A\\TEC FLK012};
+  \draw[thick] ($(vna.south)+(-2.8,0)$) |- node[pos=0.25,left,align=right] {Port 1\\(grille)} (tec.west);
+  \draw[thick] ($(vna.south)+(2.8,0)$) |- node[pos=0.25,right,align=left] {Port 2\\(drain)} (tec.east);
+  \draw[rouge,densely dashed] ($(tec.west)+(-0.15,-0.8)$) -- ($(tec.west)+(-0.15,0.8)$);
+  \draw[rouge,densely dashed] ($(tec.east)+(0.15,-0.8)$) -- ($(tec.east)+(0.15,0.8)$);
+  \node[rouge] at (0,-2.35) {Plans de référence};
+  \node[gris,font=\scriptsize\itshape] at (0,-2.75) {Câbles APC~7 entre les ports et le boîtier};
+\end{tikzpicture}
+\caption{Banc de mesure du TEC non adapté dans son boîtier de test.}
+\label{fig:banc}
+\end{figure}
+
 % ================= 2 =================
 \section{Partie théorique}
 
